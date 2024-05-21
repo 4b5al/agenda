@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/medicos', [App\Http\Controllers\MedicosController::class, 'index'])->name('medicos');
+Route::get('/medicos', [App\Http\Controllers\ProfissionalController::class, 'index'])->name('medicos');
 Route::get('/pacientes', [App\Http\Controllers\PacientesController::class, 'index'])->name('pacientes');
 Route::get('/consultas', [App\Http\Controllers\ConsultasController::class, 'index'])->name('consultas');
 Route::get('/createMedico', [App\Http\Controllers\CreateMedicoController::class, 'index'])->name('createMedico');

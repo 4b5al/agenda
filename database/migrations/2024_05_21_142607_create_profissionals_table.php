@@ -11,13 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paciente', function (Blueprint $table) {
+        Schema::create('profissionals', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->unsignedBigInteger('telefone');
+            $table->string('telefone');
             $table->string('email')->unique();
-            $table->string('cpf')->unique();;
+            $table->string('crm');
+            $table->unsignedBigInteger('categoria_id');
             $table->timestamps();
+            
+            // Definindo a chave estrangeira e o relacionamento
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paciente');
+        Schema::dropIfExists('profissionals');
     }
 };

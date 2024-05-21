@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medico', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->string("nome");
-            $table->unsignedBigInteger('telefone');
-            $table->string('email')->unique();
-            $table->string('crm')->unique();;
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medico');
+        Schema::dropIfExists('categorias');
     }
 };
