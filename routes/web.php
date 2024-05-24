@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CreateMedicoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/medicos', [App\Http\Controllers\ProfissionalController::class, 'index'])->name('medicos');
+
 Route::get('/pacientes', [App\Http\Controllers\PacientesController::class, 'index'])->name('pacientes');
+Route::post('/pacientes', [App\Http\Controllers\PacientesController::class, 'store'])->name('store.pacientes');
+
 Route::get('/consultas', [App\Http\Controllers\ConsultasController::class, 'index'])->name('consultas');
+Route::post('/consultas', [App\Http\Controllers\ConsultasController::class, 'store'])->name('store.consultas');
+
 Route::get('/createMedico', [App\Http\Controllers\CreateMedicoController::class, 'index'])->name('createMedico');
+Route::post('/createMedico', [App\Http\Controllers\CreateMedicoController::class, 'store'])->name('store');
+
+
+
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pacientes;
 
 class PacientesController extends Controller
 {
@@ -24,5 +25,21 @@ class PacientesController extends Controller
     public function index()
     {
         return view('Pacientes');
+    }
+
+
+    public function store(Request $request)
+    {   
+
+            $paciente = new Pacientes();
+            $paciente->nome = $request->input('nome');
+            $paciente->telefone = $request->input('telefone');
+            $paciente->email = $request->input('email');
+            
+            $paciente->save();
+            
+
+        return view('Pacientes');
+    
     }
 }

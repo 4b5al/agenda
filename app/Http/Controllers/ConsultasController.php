@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Consultas;
+use App\Models\Profissional;
+
+
 class ConsultasController extends Controller
 {
     public function __construct()
@@ -18,6 +22,9 @@ class ConsultasController extends Controller
      */
     public function index()
     {
-        return view('consultas');
+        $medicos = Profissional::select('id','nome', 'telefone', 'email', 'crm', 'categoria_id')->get();
+        $pacientes = Profissional::select('id','nome', 'telefone', 'email')->get();
+
+        return view('consultas', compact('medicos', 'pacientes'));
     }
 }

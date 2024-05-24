@@ -10,11 +10,11 @@ class Categorias extends Model
 {
     use HasFactory;
 
-
-    protected $fillable = ['nome'];
+    protected $table = 'categorias';
+    protected $fillable = ['id','nome'];
 
     public function profissional()
     {
-        return $this->hasMany(Profissional::class);
+        return $this->hasMany(Profissional::class, 'categoria_id');
     }
 }

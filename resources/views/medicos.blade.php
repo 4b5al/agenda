@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-        <div class="col-md 4">
+        <div class="col-md-8">
+        {{-- <div class="col-md 4"> --}}
 
             <div class="card">
                 <div class="card-header">
@@ -26,25 +26,37 @@
                     @endif
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr>                                  
                                 <th scope="col">Nome</th>
-                                <th scope="col">Médico responsável</th>
-                                <th scope="col">Data</th>
-                                <th scope="col">Horário </th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">CRM</th>
+                                <th scope="col">Especialidade</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($medicos as $medico)
+                            {{-- @foreach ($nomes as $nome) --}}
+                                        {{-- {{dd($medicos)}} --}}
                             <tr>
-                                <th scope="row"></th>
-                                <td>Mark Zuckenberg</td>
-                                <td>12/12/2222</td>
-                                <td>17:00</td>
+                                {{-- <th scope="row"></th> --}}
+                                <td>{{$medico->nome}}</td>
+                                <td>{{$medico->telefone}}</td>
+                                <td>{{$medico->email}}</td>
+                                <td>{{$medico->crm}}</td>
+                                <td>{{$medico->categorias->nome}}</td>
+                                
+
                             </tr>
+                                {{-- @endforeach --}}
+                            @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
+        {{-- </div> --}}
         </div>
     </div>
 </div>
