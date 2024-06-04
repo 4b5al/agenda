@@ -19,14 +19,14 @@ class ProfissionalController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
    
         // $nomes = Categorias::select('nome')->get();
-        // $medicos = Profissional::select('id','nome', 'telefone', 'email', 'crm', 'categoria_id')->get();
-        $medicos = Profissional::with('Categorias')->get();
+        $profissional = Profissional::select('id','nome', 'telefone', 'email', 'crm', 'categoria_id')->get();
+        $profissional = Profissional::with('Categorias')->get();
         // dd($medicos);
-        return view('medicos', compact('medicos'));
+        return view('medicos', ['profissional' => $profissional]);
     
 
 

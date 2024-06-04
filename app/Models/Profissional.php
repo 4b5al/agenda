@@ -14,7 +14,7 @@ class Profissional extends Model
 
     protected $table = 'profissionals';
 
-    protected $fillable = ['nome', 'telefone', 'email', 'crm', 'categoria_id'];
+    protected $fillable = ['id', 'nome', 'telefone', 'email', 'crm', 'categoria_id'];
 
     public function categorias()
     {

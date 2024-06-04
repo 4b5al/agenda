@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+  .blocos {
+   display: none;
+ }
+
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -21,29 +27,66 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <div class="form-group">
+                      <label for="medicos" class="form-label">Selecione um profissional</label><br>
+                      <select class="form-control" id="medicos" name="medicos">
+                        <option selected>Profssional</option>
+                        @foreach ($medicos as $medico)
+                          
+                        <option {{ $medico->categoria_id == $medico->id ? 'selected' : $medico->id }} value="{{ $medico->id }}">{{ $medico->nome  }}</option>      
+                        @endforeach
+                      </select>
+                    </div>
+                      
 
-                    
-                    <table class="table">
+                    {{-- {{dd($consultas)}} --}}
+                    @foreach ($consultas as $consulta)
+                    <div id="{{$consulta->profissional_id}}" class="blocos">
+                      {{-- <h1 {{$$consulta->profissional_id == $consultas->id}}>{{$consultas->}}</h1> --}}
+                      <table class="table">
                         <thead>
-                          <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Médico responsável</th>
+                          <tr>                                  
+                            {{-- <th scope="col"></th> --}}
+                            <th scope="col">Paciente</th>
                             <th scope="col">Data</th>
-                            <th scope="col">Horário </th>
+                            <th scope="col">Hora</th>
+                            {{-- <th scope="col">Especialidade</th> --}}
                           </tr>
                         </thead>
+                        {{-- @foreach ($consultas as $consulta) --}}
                         <tbody>
+                          {{-- {{dd($profissional)}} --}}
+                          
                           <tr>
-                            <th scope="row">Diogo Alves de França</th>
-                            <td>Mark Zuckenberg</td>
-                            <td>12/12/2222</td>
-                            <td>17:00</td>
+                            {{-- <td>{{$consulta->Profissional->nome}}</td> --}}
+                            <td>{{$consulta->Pacientes->nome}}</td>
+                            <td>{{$consulta->hora}}</td>
+                            <td>{{$consulta->data}}</td>
+                            <td>
+                              <a href="{{route('editar.consulta', $consulta->id)}}">editar</a> 
+                           </td>
+                           <td><td>
+                              <a href="{{route('excluir.consulta', $consulta->id)}}">excluir</a> 
+                           </td></td>
                           </tr>
                         </tbody>
-                    </table>
+                        {{-- @endforeach --}}
+                      </table>
+                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+  $(function() {
+    $('.form-control').change(function(){
+      $('.blocos').hide();
+      $('#' + $(this).val()).show();
+    });
+  });
+</script>
 @endsection

@@ -26,69 +26,44 @@ class CreateMedicoController extends Controller
     public function index(Request $request)
     {
         $nomes = Categorias::select('id','nome')->get();
-        $medicos = Profissional::select('id','nome', 'telefone', 'email', 'crm', 'categoria_id')->get();
+        // $profissional= Profissional::select()->get();
         // dd($nomes);
-        return view('createmedico', compact('nomes', 'medicos'));
+        return view('createmedico', compact('nomes'));
     }
 
-    public function store(Request $request)
-    {   
-        // dd($request);
+        public function store(Request $request)
+        {     
+            // if ($request->has('nome') && $request->has('telefone')) {
+                $profissional = new Profissional();
+                $profissional->nome = $request->input('nome');
+                $profissional->telefone = $request->input('telefone');
+                $profissional->email = $request->input('email');
+                $profissional->crm = $request->input('crm');
+                $profissional->categoria_id = $request->input('categoria_id'); // Certifique-se de que categoria_id está presente no request
+                $profissional->save(); 
+            // }           
 
-            // if($request->input('_token') != '' && $request->input('id') == ''){
+            return redirect()->route('createMedico');
             
-            // $regras = [
-            //     'nome' => 'required|max:40',
-            //     'telefone' => 'required|max:11',
-            //     'email' => 'required',
-            //     'crm' => 'required|max:5',
-            //     'categoria_id' => 'required'
-            // ];
-            // dd($regras);
-            
-            // $feedback = [
-            //     'required' => 'Todos os campos devem ser preenchidos'
-            // ];
-            
-            // $request->validate($regras, $feedback);
+        }
 
-            $profissional = new Profissional();
-            $profissional->nome = $request->input('nome');
-            $profissional->telefone = $request->input('telefone');
-            $profissional->email = $request->input('email');
-            $profissional->crm = $request->input('crm');
-            $profissional->categoria_id = $request->input('categoria_id'); // Certifique-se de que categoria_id está presente no request
-            $profissional->save();
-            // $profissional = new Profissional();
-            // $profissional->create($request->all());
-            // $profissional->save();
-            
+    public function editar($id){
+        //editar
+        $profissional = Profissional::find($id);
+        // dd($profissional);
+        $nomes = Profissional::with('Categorias')->get();
+        $nomes = Categorias::select('id','nome')->get();
 
-        return view('medicos');
-        
+        // $profissional->update($request->all());
 
-        //edição
-        // if($request->input('_token') != '' && $request->input('id') != ''){
-        //     $profissional = Profissional::find($request->input('id'));
+        return view('createmedico', compact('profissional', 'nomes'));
+        //dd($publicacao);
+    }
 
-        //     $subir = $profissional->update($request->all());
-    
-        // }
+    public function excluir($id){
+        //excluir
+        Profissional::find($id)->delete();
 
-
-
-
-        // $request->validate([
-        //     'nome' => 'required|max:40',
-        //     'telefone' => 'required|max:11',
-        //     'email' => 'required',
-        //     'crm' => 'required|max:5',
-        //     'categoria_id' => 'required',
-        // ]);
-
-        
-        // $profissionals = Profissional::create($request->all());
-
-    
+        return redirect()->route('medicos');
     }
 }

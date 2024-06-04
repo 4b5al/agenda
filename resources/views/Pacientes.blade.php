@@ -8,7 +8,7 @@
         <!-- {{ __('Agenda de hoje') }} -->
         <div class="toast-header">
           <!-- <img src="..." class="rounded me-2" alt="..."> -->
-          <strong class="me-auto">Agenda de hoje</strong>
+          <strong class="me-auto">Cadastrar paciente</strong>
                       <!-- <small>11 mins ago</small> -->
           <!-- <button type="button" class="btn btn-success">Novo +</button> -->
         </div>

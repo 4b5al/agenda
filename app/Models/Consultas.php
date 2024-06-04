@@ -14,7 +14,7 @@ class Consultas extends Model
     use HasFactory;
 
     protected $table = 'consultas';
-    protected $fillable = ['paciente_id', 'profissional_id', 'data', 'hora'];
+    protected $fillable = ['id','paciente_id', 'profissional_id',  'data', 'hora'];
 
     public function pacientes()
     {

@@ -35,23 +35,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($medicos as $medico)
-                            {{-- @foreach ($nomes as $nome) --}}
-                                        {{-- {{dd($medicos)}} --}}
+                            {{-- {{dd($profissional)}} --}}
+                            @foreach ($profissional as $medico)
+                            
                             <tr>
-                                {{-- <th scope="row"></th> --}}
                                 <td>{{$medico->nome}}</td>
                                 <td>{{$medico->telefone}}</td>
                                 <td>{{$medico->email}}</td>
                                 <td>{{$medico->crm}}</td>
                                 <td>{{$medico->categorias->nome}}</td>
-                                
-
-                            </tr>
-                                {{-- @endforeach --}}
+                                <td>
+                                   <a href="{{route('editarmedico', $medico->id)}}">editar</a> 
+                                </td>
+                                <td><td>
+                                   <a href="{{route('excluir', $medico->id)}}">excluir</a> 
+                                </td></td>
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
